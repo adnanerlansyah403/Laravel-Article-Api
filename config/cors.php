@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'paths' => ['api/*'], // Atur path API Anda di sini
+    'paths' => ['*'], // Atur path API Anda di sini
     'allowed_methods' => ['*'],
     'allowed_origins' => ['*'],
     'allowed_origins_patterns' => [],

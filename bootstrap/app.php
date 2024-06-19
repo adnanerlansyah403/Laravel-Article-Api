@@ -4,6 +4,7 @@ use App\Http\Middleware\IsVerifyEmail;
 use Illuminate\Foundation\Application;
 use App\Http\Middleware\CorsMiddleware;
 use App\Http\Middleware\RoleMiddleware;
+use Illuminate\Auth\Middleware\Authenticate;
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -16,15 +17,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->alias([
-            'is_verify_email' => IsVerifyEmail::class,
-            'can' => RoleMiddleware::class,
-        ]);
         $middleware->web(append: [
             HandleInertiaRequests::class,
         ]);
         // $middleware->api(append: [
-        //     CorsMiddleware::class
+        //     Authenticate::class,
         // ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

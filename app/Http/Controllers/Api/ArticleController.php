@@ -39,10 +39,10 @@ class ArticleController extends Controller
         $validateData = $request->validate([
             'title' => 'required|unique:articles,title,except,id',
             'description' => 'required',
-            'thumbnail' => 'image|mimes:png,jpg|max:2048',
-            'image' => 'image|mimes:png,jpg|max:2048',
+            'thumbnail' => 'nullable|mimes:png,jpg|max:2048',
+            'image' => 'nullable|mimes:png,jpg|max:2048',
         ]);
-        $validateData['user_id'] = $request->user()->id;
+        if($request->user()) $validateData['user_id'] = $request->user()?->id;
         $article = Article::create($validateData);
         $files = ['thumbnail', 'image'];
         foreach ($files as $file) {
@@ -76,6 +76,7 @@ class ArticleController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // dd($request);
         $validateData = $request->validate([
             'title' => 'nullable',
             'description' => 'nullable',
