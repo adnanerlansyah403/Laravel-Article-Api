@@ -78,8 +78,8 @@ class ArticleController extends Controller
     {
         // dd($request);
         $validateData = $request->validate([
-            'title' => 'nullable',
-            'description' => 'nullable',
+            'title' => 'required',
+            'description' => 'required',
             'thumbnail' => 'nullable|mimes:png,jpg|max:2048',
             'image' => 'nullable|mimes:png,jpg|max:2048',
         ]);
